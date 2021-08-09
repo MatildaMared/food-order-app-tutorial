@@ -4,27 +4,27 @@ import "./App.css";
 import Header from "./components/Layout/Header/Header";
 import Meals from "./components/Meals/Meals";
 import Cart from "./components/Cart/Cart";
+import CartProvider from "./store/CartProvider";
 
 function App() {
+	const [showCart, setShowCart] = useState(false);
 
-  const [showCart, setShowCart] = useState(false);
+	const showCartHandler = () => {
+		setShowCart(true);
+	};
 
-  const showCartHandler = () => {
-    setShowCart(true);
-  }
+	const hideCartHandler = () => {
+		setShowCart(false);
+	};
 
-  const hideCartHandler = () => {
-    setShowCart(false);
-  }
-  
 	return (
-		<div className="App">
+		<CartProvider>
 			{showCart && <Cart onClose={hideCartHandler} />}
 			<Header showCartHandler={showCartHandler} />
 			<main>
 				<Meals />
 			</main>
-		</div>
+		</CartProvider>
 	);
 }
 
